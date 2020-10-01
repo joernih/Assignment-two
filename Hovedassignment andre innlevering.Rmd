@@ -1,0 +1,16 @@
+---
+title: "Påvirker høyden inntekten?"
+author:
+  - Sofie Brynjelsen
+  - Silje Marie Danielsen
+output: html_notebook
+---
+
+
+```{r}
+library(modelr)
+library(ggplot2)
+library(knitr)
+
+```
+
