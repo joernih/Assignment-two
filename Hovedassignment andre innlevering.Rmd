@@ -11,6 +11,9 @@ output: html_notebook
 library(modelr)
 library(ggplot2)
 library(knitr)
+library(tinytex)
+library(tidyverse)
+
 
 ```
 
