@@ -1,0 +1,68 @@
+---
+title: "Does height decide income?"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+```{r setup, echo = FALSE}
+library(ggplot2)
+library(modelr)
+library(knitr)
+```
+
+## Introduction
+
+It has been claimed that the height of a person is one of the most deciding factors for the persons income. In this short paper we will investigate this assertion by using a dataset from the _National Longitudinal Study_ (U.S. Bureau of Labor Statistics). See `help(heights, package = modelr)`for details.
+
+## Summary statistics
+
+We start by grouping the heights in 8 intervals and report summary statistics.
+
+```{r}
+heights$heightInt <- cut(heights$height, breaks = 8)
+kable(summary(heights[,1:4]))
+kable(summary(heights[,5:9]))
+```
+
+## Plots
+
+```{r plot-height-income,  out.width="50%"}
+ggplot(heights, mapping = aes(x = height, y = income)) +
+  geom_point()
+```
+
+```{r}
+heightsPosInc <- subset(heights, income > 0)
+ggplot(heightsPosInc, mapping = aes(x = heightInt, y = income)) +
+  scale_y_continuous(trans = scales::log_trans()) +
+  geom_boxplot()
+```
+
+```{r}
+heightsPosInc <- subset(heights, income > 0)
+ggplot(heightsPosInc, mapping = aes(x = height, y = income)) +
+  scale_y_continuous(trans = scales::log_trans()) +
+  geom_point(position = "jitter") +
+  geom_smooth(method = 'lm')
+```
+
+```{r}
+heightsPosInc <- subset(heights, income > 0)
+ggplot(heightsPosInc, mapping = aes(x = height, y = income)) +
+  geom_point(position = "jitter") +
+  geom_smooth(method = 'lm')
+```
+
+## How much do we earn extra per inch
+
+```{r}
+summary(lm(income ~ height, data = heights))
+```
+
+### Conclusion
+
+One extra inch (2,72 cm) gives you $2982 extra income per year.
+**You should have eaten your vegetables**, as your mother told you.
