@@ -27,24 +27,32 @@ scl: apa-no-ampersand.csl
 ---
 
 
-```{r}
+```{r setup}
 library(modelr)
 library(ggplot2)
 library(knitr)
 library(tinytex)
 library(tidyverse)
 
-
 ```
 
 
 #Introduksjon
 
+
 #Statistikk
+
+```{r my_data, cache=TRUE}
+my_data <- modelr::heights
+names(my_data)
+```
+
 
 #Plots
 
+
 #Resultater
+
 
 #Konklusjon
 
