@@ -33,6 +33,7 @@ library(ggplot2)
 library(knitr)
 library(tinytex)
 library(tidyverse)
+library(ggpubr)
 
 ```
 
@@ -49,6 +50,18 @@ names(my_data)
 
 
 #Plots
+```{r}
+ggplot(data=my_data, mapping=aes(x= height, y=income )) +
+geom_point()
+
+
+  
+```
+
+```{r}
+ggplot()+
+geom_point(data=my_data, mapping=aes(x=height, y= income, colour=factor(cyl), size=qsec))
+```
 
 
 #Resultater
