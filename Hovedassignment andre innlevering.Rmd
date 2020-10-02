@@ -3,7 +3,27 @@ title: "Påvirker høyden inntekten?"
 author:
   - Sofie Brynjelsen
   - Silje Marie Danielsen
+classoption: twoside
+frontsize: 12pt
+linestretch: 1.5
+
 output: html_notebook
+  pdf_document:
+    df_print: paged
+    toc: true
+    toc_depth:3
+    fig_height
+ html_document:
+     df_print: paged
+     toc: true
+     toc_depth: 3
+     toc_float: true
+  word_document:
+      df_print: paged
+      toc: true
+      toc_depth: 3
+lang: nb-NO
+scl: apa-no-ampersand.csl
 ---
 
 
@@ -17,3 +37,5 @@ library(tidyverse)
 
 ```
 
+
+#Introduksjon
