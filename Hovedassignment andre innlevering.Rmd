@@ -78,7 +78,7 @@ ggmen<- ggplot(data=my_data, mapping=aes(x=height, y=income, colour=factor(sex))
 ggwomen<- ggplot(data=my_data, mapping=(aes(x=height, y=income, colour=factor(sex))))+
   geom_point()
 
-ggarrange(ggmen, ggwomen, labels = c("mapping=men", "mapping=women"), nrow=2)
+ggarrange(ggmen, ggwomen, labels = c("ggmen", "ggwomen"), nrow=1)
 ```
 ```{r}
 #Regresjon
@@ -87,7 +87,21 @@ ggplot(data=my_data, mapping=aes(x=height, y=income))+
   geom_smooth(method="lm", se=FALSE)+
   geom_smooth(method= MASS::rlm, colour="Red", se=FALSE)
 ```
-Summary(my_data)
+
+```{r}
+box <- ggplot(data=my_data, mapping= aes(height))+
+  geom_boxplot ()
+box
+```
+
+```{r}
+ggplot(data=my_data, mapping=aes(x=height, y=income))+
+  facet_wrap(~cut_number(sex, n=2))+
+  geom_point(aes(colour = cut_number(sex, n=2)))+
+  geom_smooth(method= "lm", se=FALSE)
+  
+```
+
 
 #Resultater
 
