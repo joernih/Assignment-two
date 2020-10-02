@@ -63,7 +63,7 @@ Ser variablene ut til å være normal-fordelte eller kan en transformasjon være
 
 ```{r}
 ggplot()+
-geom_point(data=my_data, mapping=aes(height,income, colour=factor(cyl), size=qsec))
+geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
 
 
 
