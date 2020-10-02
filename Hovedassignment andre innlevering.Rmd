@@ -57,10 +57,19 @@ geom_point()
 
   
 ```
+Ser variablene ut til å være normal-fordelte eller kan en transformasjon være på sin plass? Hvor kommer de svarte prikkene på rekke øverst i geom_point plottet fra?
+
+
 
 ```{r}
 ggplot()+
-geom_point(data=my_data, mapping=aes(x=height, y= income, colour=factor(cyl), size=qsec))
+geom_point(data=my_data, mapping=aes(height,income, colour=factor(cyl), size=qsec))
+
+
+
+```
+```{r}
+p3 <- ggplot(data=my_data, mapping=aes())
 ```
 
 
