@@ -63,7 +63,7 @@ kable(summary(heights[,5:9]))
 
 #Plots
 ```{r}
-ggplot(data=my_data, mapping=aes(x= height, y=income )) +
+ggplot(data=my_data, mapping=aes(x= height, y=income)) +
 geom_point()
 
 
@@ -72,6 +72,30 @@ geom_point()
 Ser variablene ut til å være normal-fordelte eller kan en transformasjon være på sin plass? 
 Hvor kommer de svarte prikkene på rekke øverst i geom_point plottet fra?
 De øverste prikkene er de som har høyest lønn. De har valgt å ta gjennomsnittet av de som har høyest lønn, derfor er de på likt nivå øverst i histogrammet. Det viser også at flertallet av de som tjener over gjennomsnittet er menn. 
+
+```{r}
+ggplot(data=my_data, mapping=aes(x= height, y=income)) +
+geom_point()+
+   ylim(0, 300000)
+```
+
+#Desnity plot
+```{r}
+ggplot(aes(x=height))+
+  geom_density(fill=income, color= income, alpha=2000) +
+  theme_ipsum()
+
+
+
+```
+
+
+```{r}
+ggplot(my_data, aes(x=weight, y=income)) +
+  geom_line()+
+  ylim(0, 300000)
+```
+
 
 
 ```{r}
@@ -104,7 +128,8 @@ ggplot(data=my_data, mapping=aes(x=height, y=income))+
 box <- subset(heights, income > 0)
 ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(sex)))+
   scale_y_continuous(trans = scales::log_trans())+ 
-  geom_boxplot()
+  geom_boxplot()+
+   ylim(2000, 300000)
 
 
 
@@ -123,7 +148,8 @@ Ved å se på kjønn som en faktor, kan vi se at mange menn har høyre lønn en 
 box <- subset(heights, income > 0)
 ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(marital)))+
   scale_y_continuous(trans = scales::log_trans())+ 
-  geom_boxplot()
+  geom_boxplot()+
+   ylim(0, 300000)
 ```
 hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er menn, og det er et høyt antall av dem som er skilte.
 
