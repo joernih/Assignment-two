@@ -47,6 +47,19 @@ my_data <- modelr::heights
 names(my_data)
 ```
 
+#disruptiv statistikk
+```{r}
+heights$heightInt<- cut(heights$height, breaks=8)
+kable(summary(heights[,1:4]))
+
+```
+```{r}
+kable(summary(heights[,5:9]))
+```
+
+
+
+
 
 #Plots
 ```{r}
