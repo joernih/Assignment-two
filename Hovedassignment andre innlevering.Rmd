@@ -101,10 +101,37 @@ ggplot(data=my_data, mapping=aes(x=height, y=income))+
 ```
 
 ```{r}
-box <- ggplot(data=my_data, mapping= aes(height))+
-  geom_boxplot ()
-box
+box <- subset(heights, income > 0)
+ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(sex)))+
+  scale_y_continuous(trans = scales::log_trans())+ 
+  geom_boxplot()
+
+
+
 ```
+Boksene representerer 50% av observasjonene. 
+Medianen er linjen som skjæreer gjennom boksen. 
+linjene som er vertikale, repsenterer minimum og maximun av lønnen og fra hver sin side rep.
+"Prikkene" er kalt for outliers og representerer de som har "uvanlig" høy eller lav inntekt i forhold til medianen. 
+box 1: når x er 52,56. 
+De fleste dataene er  innefor boksen, det vil si at standardavviket ikke er stort. 
+Det vil si at avstanden i lønnsintekt mellom mennesker på 1,52 ikke er stor. 
+Medianen blir høyere, når høyden øker. 
+Det vil si lønnen øker jo høyere en blir.
+Ved å se på kjønn som en faktor, kan vi se at mange menn har høyre lønn en kvinner.
+```{r}
+box <- subset(heights, income > 0)
+ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(marital)))+
+  scale_y_continuous(trans = scales::log_trans())+ 
+  geom_boxplot()
+```
+hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er menn, og det er et høyt antall av dem som er skilte.
+
+```
+
+
+
+
 
 ```{r}
 ggplot(data=my_data, mapping=aes(x=height, y=income))+
