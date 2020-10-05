@@ -6,21 +6,21 @@ author:
 classoption: twoside
 frontsize: 12pt
 linestretch: 1.5
-output: html_notebook
-  pdf_document:
-    df_print: paged
-    toc: true
-    toc_depth:3
-    fig_height
- html_document:
-     df_print: paged
-     toc: true
-     toc_depth: 3
-     toc_float: true
-  word_document:
-      df_print: paged
-      toc: true
-      toc_depth: 3
+# output: html_notebook
+#   pdf_document:
+#     df_print: paged
+#     toc: true
+#     toc_depth:3
+#     fig_height
+  # html_document:
+  #    df_print: paged
+  #    toc: true
+  #    toc_depth: 3
+  #    toc_float: true
+  # word_document:
+  #     df_print: paged
+  #     toc: true
+  #     toc_depth: 3
 lang: nb-NO
 scl: apa-no-ampersand.csl
 ---
@@ -81,9 +81,9 @@ geom_point()+
 
 #Desnity plot
 ```{r}
-ggplot(aes(x=height))+
-  geom_density(fill=income, color= income, alpha=2000) +
-  theme_ipsum()
+# ggplot(aes(x=height))+
+#   geom_density(fill=income, color= income, alpha=2000) +
+#   theme_ipsum()
 
 
 
@@ -161,11 +161,11 @@ hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er me
 
 
 ```{r}
-ggplot(data=my_data, mapping=aes(x=height, y=income))+
-  facet_wrap(~cut_number(sex, n=2))+
-  geom_point(aes(colour = cut_number(sex, n=2)))+
-  geom_smooth(method= "lm", se=FALSE)
-  
+#ggplot(data=my_data, mapping=aes(x=height, y=income))+
+#  facet_wrap(~cut_number(sex, n=2))+
+#  geom_point(aes(colour = cut_number(sex, n=2)))+
+#  geom_smooth(method= "lm", se=FALSE)
+
 ```
 
 
