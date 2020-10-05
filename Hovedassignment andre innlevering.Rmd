@@ -13,11 +13,11 @@ output: html_notebook
     toc: true
     toc_depth:3
     fig_height
- html_document:
-     df_print: paged
-     toc: true
-     toc_depth: 3
-     toc_float: true
+# html_document:
+#     df_print: paged
+#     toc: true
+#     toc_depth: 3
+#     toc_float: true
   word_document:
       df_print: paged
       toc: true
