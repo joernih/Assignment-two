@@ -67,17 +67,14 @@ geom_point()+
 
 #Desnity plot
 ```{r}
-# ggplot(aes(x=height))+
-#   geom_density(fill=income, color= income, alpha=2000) +
-#   theme_ipsum()
-
-
-
+ ggplot(data=my_data)+
+   geom_density(aes(x=height), fill="darkgreen") 
 ```
 
 
+
 ```{r}
-ggplot(my_data, aes(x=weight, y=income)) +
+ggplot(data=my_data, aes(x=weight, y=income)) +
   geom_line()+
   ylim(0, 300000)
 ```
@@ -157,6 +154,9 @@ hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er me
 
 #Resultater
 
+```{r}
+summary(my_data)
+```
 
 #Konklusjon
 
