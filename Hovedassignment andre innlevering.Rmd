@@ -106,12 +106,13 @@ geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex))
 
 ```
 ```{r}
+library(dplyr)
+my_data_fem <- my_data %>% dplyr::filter(sex=="female")
+my_data_male<- my_data %>% dplyr::filter(sex=="male")
 
-
-
-ggmen<- ggplot(data=my_data, mapping=aes(x=height, y=income, colour=factor(sex)))+
+ggmen<- ggplot(data=my_data_male, mapping=aes(x=height, y=income, colour=factor(sex)))+
   geom_point()
-ggwomen<- ggplot(data=my_data, mapping=(aes(x=height, y=income, colour=factor(sex))))+
+ggwomen<- ggplot(data=my_data_fem, mapping=(aes(x=height, y=income, colour=factor(sex))))+
   geom_point()
 
 ggarrange(ggmen, ggwomen, labels = c("ggmen", "ggwomen"), nrow=1)
