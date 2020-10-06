@@ -129,9 +129,6 @@ ggplot()+
 ```
 
 
-```
-
-
 ```{r}
 #Regresjon
 ggplot(data=my_data, mapping=aes(x=height, y=income))+
@@ -140,13 +137,13 @@ ggplot(data=my_data, mapping=aes(x=height, y=income))+
   geom_smooth(method= MASS::rlm, colour="Red", se=FALSE)
 ```
 
+
 ```{r}
 box <- subset(heights, income > 0)
 ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(sex)))+
   scale_y_continuous(trans = scales::log_trans())+ 
   geom_boxplot()+
   ylim(2000, 300000)
-
 
 
 ```
@@ -169,7 +166,15 @@ ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(marital)))+
 ```
 Hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er menn, og det er et høyt antall av dem som er skilte.
 
-
+```{r}
+ggplot(data=my_data, mapping=aes(x=height, y=income, colour=factor(age)))+
+  facet_grid(sex ~marital)+
+  geom_point()
+```
+Ved å ta i bruk facet_grid kan vi se på om alder og sivilstatus har noe å si for hvor mye man tjener. 
+ut i fra dataene kan man se en sammenheng mellom inntekt og sivilstatus. 
+Det ser ut til at de som entene er single, gift eller skilt, har en høyere inntekt. 
+Vi kan også se at mange av de som har høy inntekt har en alder på 50+.
 
 ```{r}
 ggplot(data=my_data, mapping=aes(x=height, y=income))+
