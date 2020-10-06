@@ -50,10 +50,10 @@ kable(summary(heights[,5:9]))
 #Plots
 ```{r}
 ggplot(data=my_data, mapping=aes(x= height, y=income)) +
-geom_point()
+  geom_point()
 
 
-  
+
 ```
 Ser variablene ut til å være normal-fordelte eller kan en transformasjon være på sin plass? 
 Hvor kommer de svarte prikkene på rekke øverst i geom_point plottet fra?
@@ -61,14 +61,14 @@ De øverste prikkene er de som har høyest lønn. De har valgt å ta gjennomsnit
 
 ```{r}
 ggplot(data=my_data, mapping=aes(x= height, y=income)) +
-geom_point()+
-   ylim(0, 300000)
+  geom_point()+
+  ylim(0, 300000)
 ```
 
 #Desnity plot
 ```{r}
- ggplot(data=my_data)+
-   geom_density(aes(x=height), fill="darkgreen") 
+ggplot(data=my_data)+
+  geom_density(aes(x=height), fill="darkgreen") 
 ```
 
 
@@ -83,7 +83,7 @@ ggplot(data=my_data, aes(x=weight, y=income)) +
 
 ```{r}
 ggplot()+
-geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
+  geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
 
 
 
@@ -99,7 +99,14 @@ ggwomen<- ggplot(data=my_data_fem, mapping=(aes(x=height, y=income, colour=facto
   geom_point()
 
 ggarrange(ggmen, ggwomen, labels = c("ggmen", "ggwomen"), nrow=1)
+
+
 ```
+I graf 1, er det flest menn i høyden 65 til 74.
+Ser på grafen til høyre ser vi at flertallet av kvinner har en høyde på 60 til 70. 
+
+
+
 ```{r}
 #Regresjon
 ggplot(data=my_data, mapping=aes(x=height, y=income))+
@@ -113,7 +120,7 @@ box <- subset(heights, income > 0)
 ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(sex)))+
   scale_y_continuous(trans = scales::log_trans())+ 
   geom_boxplot()+
-   ylim(2000, 300000)
+  ylim(2000, 300000)
 
 
 
@@ -133,21 +140,17 @@ box <- subset(heights, income > 0)
 ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(marital)))+
   scale_y_continuous(trans = scales::log_trans())+ 
   geom_boxplot()+
-   ylim(0, 300000)
+  ylim(0, 300000)
 ```
-hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er menn, og det er et høyt antall av dem som er skilte.
-
-```
-
-
+Hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er menn, og det er et høyt antall av dem som er skilte.
 
 
 
 ```{r}
-#ggplot(data=my_data, mapping=aes(x=height, y=income))+
-#  facet_wrap(~cut_number(sex, n=2))+
-#  geom_point(aes(colour = cut_number(sex, n=2)))+
-#  geom_smooth(method= "lm", se=FALSE)
+ggplot(data=my_data, mapping=aes(x=height, y=income))+
+facet_wrap(~cut_number(sex, n=2))+
+geom_point(aes(colour = cut_factor(sex, n=2)))+
+geom_smooth(method= "lm", se=TRUE)
 
 ```
 
