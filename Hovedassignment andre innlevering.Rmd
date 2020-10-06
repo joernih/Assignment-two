@@ -195,13 +195,6 @@ ut i fra dataene kan man se en sammenheng mellom inntekt og sivilstatus.
 Det ser ut til at de som entene er single, gift eller skilt, har en høyere inntekt. 
 Vi kan også se at mange av de som har høy inntekt har en alder på 50+.
 
-```{r}
-ggplot(data=my_data, mapping=aes(x=height, y=income))+
-facet_wrap(~cut_number(sex, n=2))+
-geom_point(aes(colour = cut_factor(sex, n=2)))+
-geom_smooth(method= "lm", se=TRUE)
-
-```
 
 ```{r}
 summary(lm(income~height, data=heights))
