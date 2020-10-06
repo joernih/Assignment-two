@@ -1,14 +1,14 @@
 ---
 title: "Påvirker høyden inntekten?"
 author:
-  - Sofie Brynjelsen
-  - Silje Marie Danielsen
+- Sofie Brynjelsen
+- Silje Marie Danielsen
 classoption: twoside
-frontsize: 12pt
+output: word_document
 linestretch: 1.5
-
 lang: nb-NO
 scl: apa-no-ampersand.csl
+frontsize: 12pt
 ---
 
 
@@ -42,8 +42,9 @@ kable(summary(heights[,1:4]))
 ```{r}
 kable(summary(heights[,5:9]))
 ```
-
-
+Vi velger å legge hovedvekt på sammenhengen mellom høyde og inntekt, samt se om sivilstatus og kjønn har en påvirking på inntekt. 
+Det er 3402 menn og 3604 kvinner som deltok i undersøkelsen.
+I kolonnen inntekt er gjennomsnittet relativt høyt forhold til medianen, kan forklares med at det er noen som tjener veldig mye, som utspiller til et høyt gjennomssnitt. 
 
 
 
@@ -52,11 +53,8 @@ kable(summary(heights[,5:9]))
 ggplot(data=my_data, mapping=aes(x= height, y=income)) +
   geom_point()
 
-
-
 ```
   
-
 Ser variablene ut til å være normal-fordelte eller kan en transformasjon være på sin plass?
 
 Hvor kommer de svarte prikkene på rekke øverst i geom_point plottet fra?
@@ -75,6 +73,10 @@ ggplot(data=my_data)+
   geom_density(aes(x=height), fill="darkgreen") 
 ```
 
+```{r}
+ggplot(data=my_data)+
+  geom_density(aes(x=income), fill="darkgreen")
+```
 
 
 
@@ -83,7 +85,11 @@ ggplot()+
   geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
 
 ```
- Flertallet av de som er høyest er menn. 
+ I dette histogrammet har vi delt opp i kvinner og menn, for å se om det har en betydning på inntekt. På de prikkene øverst i histogrammet er det flest menn. 
+Kvinnene som har vært med i undersøkelsen er relativt lavere enn mennene.
+Kurven nedover på venstre side er ikke så bratt som på høyre side.
+ 
+ 
 ```{r}
 library(dplyr)
 my_data_fem <- my_data %>% dplyr::filter(sex=="female")
@@ -100,7 +106,17 @@ ggarrange(ggmen, ggwomen, labels = c("ggmen", "ggwomen"), nrow=1)
 ```
 I graf ggmen, er det flest menn i høyden 65 til 74.
 Ser på grafen til høyre ser vi at flertallet av kvinner har en høyde på 60 til 70. 
+Man kan også se at det er flere menn enn kvinner som har høy inntekt. 
 
+
+
+```{r}
+
+
+ggplot()+
+  geom_point(data=my_data,mapping= aes(x=height, y=income),alpha=0.4, shape=factor(ifelse(sex, "male", "female")), size=3) +
+  labs(colour = "marital",alpha= "height/income", shape=sex)
+```
 
 
 ```{r}
