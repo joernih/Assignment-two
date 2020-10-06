@@ -121,19 +121,17 @@ I graf ggmen, er det flest menn i høyden 65 til 74.
 Ser på grafen til høyre ser vi at flertallet av kvinner har en høyde på 60 til 70. 
 Man kan også se at det er flere menn enn kvinner som har høy inntekt. 
 
-```{r}
-sex<- pull(my_data[,6])
-sex
-```
+
 ```{r}
 summary(my_data)
+
 ```
 
 
 ```{r}
 
 ggplot()+
-  geom_point(data=my_data,mapping= aes(x=height, y=income),alpha=0.3, shape=factor(ifelse(sex=="male", "male","female")), size=2) +
+  geom_point(data=my_data,mapping= aes(x=height, y=income),alpha=0.3, shape=factor(if_else(sex=="male", "male","female")), size=2) +
   labs(colour = "marital",alpha= "height/income", shape=sex)
 
 ```
@@ -146,6 +144,7 @@ ggplot(data=my_data, mapping=aes(x=height, y=income))+
   geom_smooth(method="lm", se=FALSE)+
   geom_smooth(method= MASS::rlm, colour="Red", se=FALSE)
 ```
+
 ```{r}
 
 g<- ggplot(my_data, aes(height,income))
