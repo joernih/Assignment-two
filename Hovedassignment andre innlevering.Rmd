@@ -122,10 +122,20 @@ Ser på grafen til høyre ser vi at flertallet av kvinner har en høyde på 60 t
 Man kan også se at det er flere menn enn kvinner som har høy inntekt. 
 
 ```{r}
+sex<- pull(my_data[,6])
+sex
+```
+```{r}
+summary(my_data)
+```
+
+
+```{r}
 
 ggplot()+
-  geom_point(data=my_data,mapping= aes(x=height, y=income),alpha=0.4, shape=factor(ifelse(sex, "male", "female")), size=3) +
+  geom_point(data=my_data,mapping= aes(x=height, y=income),alpha=0.3, shape=factor(ifelse(sex=="male", "male","female")), size=2) +
   labs(colour = "marital",alpha= "height/income", shape=sex)
+
 ```
 
 
@@ -135,6 +145,15 @@ ggplot(data=my_data, mapping=aes(x=height, y=income))+
   geom_point()+
   geom_smooth(method="lm", se=FALSE)+
   geom_smooth(method= MASS::rlm, colour="Red", se=FALSE)
+```
+```{r}
+
+g<- ggplot(my_data, aes(height,income))
+q + geom_point()
+q + geom_point(position="jitter")
+
+q + geom_jitter(aes(colour=sex))
+
 ```
 
 
