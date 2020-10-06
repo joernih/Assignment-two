@@ -4,7 +4,9 @@ author:
 - Sofie Brynjelsen
 - Silje Marie Danielsen
 classoption: twoside
-output: word_document
+output:
+  html_document:
+    df_print: paged
 linestretch: 1.5
 lang: nb-NO
 scl: apa-no-ampersand.csl
