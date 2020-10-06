@@ -73,6 +73,7 @@ ggplot(data=my_data)+
   geom_density(aes(x=height), fill="darkgreen") 
 ```
 I Density plotet, hvor man har brukt variabelen høyde, kan man se at den er tilnærmet lik normalfordelt.  
+
 ```{r}
 ggplot(data=my_data)+
   geom_density(aes(x=income), fill="darkgreen")
@@ -88,20 +89,15 @@ income_transf <- log(my_data_income)
 
 ```
 
-
-
 ```{r}
 ggplot()+
   geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
 
 ```
-<<<<<<< HEAD
- I dette histogrammet har vi delt opp i kvinner og menn, for å se om det har en betydning på inntekt. På de prikkene øverst i histogrammet er det flest menn. 
+I dette histogrammet har vi delt opp i kvinner og menn, for å se om det har en betydning på inntekt. 
+På de prikkene øverst i histogrammet er det flest menn. 
 Kvinnene som har vært med i undersøkelsen er relativt lavere enn mennene.
 Kurven nedover på venstre side er ikke så bratt som på høyre side.
- 
- 
-
 
 
 ```{r}
@@ -122,15 +118,13 @@ I graf ggmen, er det flest menn i høyden 65 til 74.
 Ser på grafen til høyre ser vi at flertallet av kvinner har en høyde på 60 til 70. 
 Man kan også se at det er flere menn enn kvinner som har høy inntekt. 
 
-
 ```{r}
-
 
 ggplot()+
   geom_point(data=my_data,mapping= aes(x=height, y=income),alpha=0.4, shape=factor(ifelse(sex, "male", "female")), size=3) +
   labs(colour = "marital",alpha= "height/income", shape=sex)
 ```
-```{r}
+
 
 ```
 
