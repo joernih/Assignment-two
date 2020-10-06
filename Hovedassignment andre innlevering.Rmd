@@ -83,7 +83,7 @@ ggplot()+
   geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
 
 ```
- Flertallet av de som er høyest er menn. 
+ Flertallet av de som er høyest er menn.
 ```{r}
 library(dplyr)
 my_data_fem <- my_data %>% dplyr::filter(sex=="female")
@@ -100,7 +100,7 @@ ggarrange(ggmen, ggwomen, labels = c("ggmen", "ggwomen"), nrow=1)
 ```
 I graf ggmen, er det flest menn i høyden 65 til 74.
 Ser på grafen til høyre ser vi at flertallet av kvinner har en høyde på 60 til 70. 
-
+Man kan også se at det er flere menn enn kvinner som har høy inntekt. 
 
 
 ```{r}
