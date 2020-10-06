@@ -85,7 +85,8 @@ ggplot()+
   geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
 
 ```
-<<<<<<< HEAD
+
+
  I dette histogrammet har vi delt opp i kvinner og menn, for å se om det har en betydning på inntekt. På de prikkene øverst i histogrammet er det flest menn. 
 Kvinnene som har vært med i undersøkelsen er relativt lavere enn mennene.
 Kurven nedover på venstre side er ikke så bratt som på høyre side.
