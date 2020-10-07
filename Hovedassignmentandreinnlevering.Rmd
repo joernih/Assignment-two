@@ -40,8 +40,8 @@ names(my_data)
 ```{r}
 heights$heightInt<- cut(heights$height, breaks=8)
 kable(summary(heights[,1:4]))
-
 ```
+
 ```{r}
 kable(summary(heights[,5:9]))
 ```
