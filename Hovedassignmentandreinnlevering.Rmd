@@ -1,27 +1,218 @@
 ---
 title: "Påvirker høyden inntekten?"
 author:
-  - Sofie Brynjelsen
-  - Silje Marie Danielsen
+- Sofie Brynjelsen
+- Silje Marie Danielsen
 classoption: twoside
+<<<<<<< HEAD:Hovedassignmentandreinnlevering.Rmd
 frontsize: 12pt
 linestretch: 1.5
 output: html_notebook
 
+=======
+output:
+  html_document:
+    df_print: paged
+linestretch: 1.5
+>>>>>>> Plan:Hovedassignment andre innlevering.Rmd
 lang: nb-NO
 scl: apa-no-ampersand.csl
+frontsize: 12pt
 ---
 
 
-```{r}
+```{r setup}
 library(modelr)
 library(ggplot2)
 library(knitr)
 library(tinytex)
 library(tidyverse)
-
+library(ggpubr)
 
 ```
 
 
 #Introduksjon
+
+
+#Statistikk
+
+```{r my_data, cache=TRUE}
+my_data <- modelr::heights
+names(my_data)
+```
+
+#disruptiv statistikk
+```{r}
+heights$heightInt<- cut(heights$height, breaks=8)
+kable(summary(heights[,1:4]))
+
+```
+```{r}
+kable(summary(heights[,5:9]))
+```
+Vi velger å legge hovedvekt på sammenhengen mellom høyde og inntekt, samt se om sivilstatus og kjønn har en påvirking på inntekt. 
+Det er 3402 menn og 3604 kvinner som deltok i undersøkelsen.
+I kolonnen inntekt er gjennomsnittet relativt høyt forhold til medianen, kan forklares med at det er noen som tjener veldig mye, som utspiller til et høyt gjennomssnitt. 
+
+
+
+#Plots
+```{r}
+ggplot(data=my_data, mapping=aes(x= height, y=income)) +
+  geom_point()
+
+```
+  
+Ser variablene ut til å være normal-fordelte eller kan en transformasjon være på sin plass?
+
+Hvor kommer de svarte prikkene på rekke øverst i geom_point plottet fra?
+De øverste prikkene er de som har høyest lønn. De har valgt å ta gjennomsnittet av de som har høyest lønn, derfor er de på likt nivå øverst i histogrammet. 
+
+```{r}
+ggplot(data=my_data, mapping=aes(x= height, y=income)) +
+  geom_point()+
+  ylim(0, 300000)
+```
+Her ser man hvordan histogrammet ser ut, dersom man ser bort i fra de som har den høyeste inntekten.
+
+#Desnity plot
+```{r}
+ggplot(data=my_data)+
+  geom_density(aes(x=height), fill="darkgreen") 
+```
+I Density plotet, hvor man har brukt variabelen høyde, kan man se at den er tilnærmet lik normalfordelt.  
+
+```{r}
+ggplot(data=my_data)+
+  geom_density(aes(x=income), fill="darkgreen")
+ 
+```
+Videre ville vi se på varibelen inntekt i et density plot, hvor vi fant ut at denne ikke er normalfordelt.
+Det vil i dette tilfellet være en fordel å gjøre en tranformasjon. 
+
+```{r}
+my_data_income<- my_data%>%
+  dplyr::filter(income>30000)%>% 
+dplyr::mutate(income_transf=log(my_data_income))+
+income_transfer<- log(my_data_income)
+  
+
+```
+
+```{r}
+ggplot()+
+  geom_point(data=my_data, mapping=aes(x = height, y = income, colour=factor(sex)))
+
+```
+
+I dette histogrammet har vi delt opp i kvinner og menn, for å se om det har en betydning på inntekt. 
+På de prikkene øverst i histogrammet er det flest menn. 
+Kvinnene som har vært med i undersøkelsen er relativt lavere enn mennene.
+Kurven nedover på venstre side er ikke så bratt som på høyre side.
+
+
+```{r}
+library(dplyr)
+my_data_fem <- my_data %>% dplyr::filter(sex=="female")
+my_data_male<- my_data %>% dplyr::filter(sex=="male")
+
+ggmen<- ggplot(data=my_data_male, mapping=aes(x=height, y=income, colour=factor(sex)))+
+  geom_point()
+ggwomen<- ggplot(data=my_data_fem, mapping=(aes(x=height, y=income, colour=factor(sex))))+
+  geom_point()
+
+ggarrange(ggmen, ggwomen, labels = c("ggmen", "ggwomen"), nrow=1)
+
+
+```
+I graf ggmen, er det flest menn i høyden 65 til 74.
+Ser på grafen til høyre ser vi at flertallet av kvinner har en høyde på 60 til 70. 
+Man kan også se at det er flere menn enn kvinner som har høy inntekt. 
+
+
+```{r}
+summary(my_data)
+
+```
+
+
+```{r}
+
+ggplot()+
+  geom_point(data=my_data,mapping= aes(x=height, y=income),alpha=0.3, shape=factor(if_else(sex=="male", "male","female")), size=2) +
+  labs(colour = "marital",alpha= "height/income", shape=sex)
+
+```
+
+
+```{r}
+#Regresjon
+ggplot(data=my_data, mapping=aes(x=height, y=income))+
+  geom_point()+
+  geom_smooth(method="lm", se=FALSE)+
+  geom_smooth(method= MASS::rlm, colour="Red", se=FALSE)
+```
+
+```{r}
+
+g<- ggplot(my_data, aes(height,income))
+q + geom_point()
+q + geom_point(position="jitter")
+
+q + geom_jitter(aes(colour=sex))
+
+```
+
+
+```{r}
+box <- subset(heights, income > 0)
+ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(sex)))+
+  scale_y_continuous(trans = scales::log_trans())+ 
+  geom_boxplot()+
+  ylim(2000, 300000)
+
+
+```
+Boksene representerer 50% av observasjonene. 
+Medianen er linjen som skjæreer gjennom boksen. 
+linjene som er vertikale, repsenterer minimum og maximun av lønnen og fra hver sin side rep.
+"Prikkene" er kalt for outliers og representerer de som har "uvanlig" høy eller lav inntekt i forhold til medianen. 
+box 1: når x er 52,56. 
+De fleste dataene er  innefor boksen, det vil si at standardavviket ikke er stort. 
+Det vil si at avstanden i lønnsintekt mellom mennesker på 1,52 ikke er stor. 
+Medianen blir høyere, når høyden øker. 
+Det vil si lønnen øker jo høyere en blir.
+Ved å se på kjønn som en faktor, kan vi se at mange menn har høyre lønn en kvinner.
+```{r}
+box <- subset(heights, income > 0)
+ggplot(box, mapping= aes(x=heightInt, y=income, colour=factor(marital)))+
+  scale_y_continuous(trans = scales::log_trans())+ 
+  geom_boxplot()+
+  ylim(0, 300000)
+```
+Hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er menn, og det er et høyt antall av dem som er skilte.
+
+```{r}
+ggplot(data=my_data, mapping=aes(x=height, y=income, colour=factor(age)))+
+  facet_grid(sex ~marital)+
+  geom_point()
+```
+Ved å ta i bruk facet_grid kan vi se på om alder og sivilstatus har noe å si for hvor mye man tjener. 
+ut i fra dataene kan man se en sammenheng mellom inntekt og sivilstatus. 
+Det ser ut til at de som entene er single, gift eller skilt, har en høyere inntekt. 
+Vi kan også se at mange av de som har høy inntekt har en alder på 50+.
+
+
+```{r}
+summary(lm(income~height, data=heights))
+```
+En ekstra inch vil gi en inntektseøkning på $2981. 
+
+#Resultater
+
+
+
+#Konklusjon
+
+
