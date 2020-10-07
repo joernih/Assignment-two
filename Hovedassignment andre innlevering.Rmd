@@ -86,8 +86,10 @@ Det vil i dette tilfellet være en fordel å gjøre en tranformasjon.
 
 ```{r}
 my_data_income<- my_data%>%
-  dplyr::filter(income)
-income_transf <- log(my_data_income)
+  dplyr::filter(income>30000)%>% 
+income_transfer<- log(my_data_income)
+dplyr::mutate(income_transf=log(my_data_income))
+  
 
 ```
 
