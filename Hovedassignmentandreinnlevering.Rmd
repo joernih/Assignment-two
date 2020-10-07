@@ -129,6 +129,10 @@ summary(my_data)
 
 ```
 
+```{r}
+sex<-pull(my_data[,6])
+
+```
 
 ```{r}
 
@@ -189,7 +193,7 @@ Hvis vi sammenligner de to boxene kan vi se at de ligger høyt på inntekt er me
 ```{r}
 ggplot(data=my_data, mapping=aes(x=height, y=income, colour=factor(age)))+
   facet_grid(sex ~marital)+
-  geom_point()
+  geom_point() 
 ```
 Ved å ta i bruk facet_grid kan vi se på om alder og sivilstatus har noe å si for hvor mye man tjener. 
 ut i fra dataene kan man se en sammenheng mellom inntekt og sivilstatus. 
