@@ -4,17 +4,11 @@ author:
 - Sofie Brynjelsen
 - Silje Marie Danielsen
 classoption: twoside
-<<<<<<< HEAD:Hovedassignmentandreinnlevering.Rmd
 frontsize: 12pt
 linestretch: 1.5
-output: html_notebook
-
-=======
-output:
-  html_document:
-    df_print: paged
-linestretch: 1.5
->>>>>>> Plan:Hovedassignment andre innlevering.Rmd
+output: 
+   html_notebook
+   
 lang: nb-NO
 scl: apa-no-ampersand.csl
 frontsize: 12pt
