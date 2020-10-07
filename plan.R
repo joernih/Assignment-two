@@ -1,0 +1,14 @@
+Oppgaveinndeling:
+
+
+
+
+
+
+g
+
+
+
+y
+
+P
